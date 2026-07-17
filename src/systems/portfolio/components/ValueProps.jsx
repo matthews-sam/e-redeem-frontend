@@ -33,7 +33,7 @@ export default function ValueProps() {
             key={prop.title}
             className="rounded-lg border border-p-mist bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-p-current/30 hover:shadow-md motion-reduce:hover:translate-y-0"
           >
-            <h3 className="font-p-display text-lg font-semibold text-p-depth">
+            <h3 className="font-p-display text-lg text-p-depth">
               {prop.title}
             </h3>
             <p className="mt-2 font-p-body text-sm leading-relaxed text-p-slate">

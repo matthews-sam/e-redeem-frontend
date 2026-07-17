@@ -12,7 +12,7 @@ export default function Contact() {
           <span className="font-p-body text-xs font-semibold uppercase tracking-wider text-p-slate">
             Contact us
           </span>
-          <h2 className="mt-2 font-p-display text-2xl font-semibold text-p-depth sm:text-3xl">
+          <h2 className="mt-2 font-p-display text-2xl text-p-depth sm:text-3xl">
             Get in touch
           </h2>
           <p className="mt-3 max-w-sm font-p-body text-sm text-p-slate">

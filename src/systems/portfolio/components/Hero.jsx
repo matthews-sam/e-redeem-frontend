@@ -9,11 +9,9 @@ export default function Hero() {
           Built for brand-led growth teams
         </span>
 
-        <h1 className="mt-6 font-p-display text-3xl font-semibold leading-tight text-white sm:text-5xl">
+        <h1 className="mt-6 font-p-display text-3xl leading-tight text-white sm:text-5xl">
           Unlock the power of{' '}
-          <span className="font-serif italic text-p-current" style={{ fontFamily: 'Fraunces, serif' }}>
-            intelligent
-          </span>{' '}
+          <span className="text-p-current">intelligent</span>{' '}
           brand engagement.
         </h1>
         <p className="mx-auto mt-6 max-w-xl font-p-body text-base text-white/70 sm:text-lg">

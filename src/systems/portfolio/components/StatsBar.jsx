@@ -17,7 +17,7 @@ export default function StatsBar() {
             <div className="font-p-body text-[11px] font-medium uppercase tracking-wider text-white/50">
               {stat.label}
             </div>
-            <div className="mt-2 font-p-display text-3xl font-semibold tabular-nums text-white">
+            <div className="mt-2 font-p-display text-3xl tabular-nums text-white">
               {stat.value ?? (
                 <span className="text-white/25" title="Awaiting figure from client">
                   —

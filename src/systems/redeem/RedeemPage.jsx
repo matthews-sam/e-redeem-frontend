@@ -67,7 +67,7 @@ export default function RedeemPage() {
         <span className="font-r-body text-xs font-semibold uppercase tracking-wider text-r-signal">
           How it works
         </span>
-        <h2 className="mt-2 font-r-display text-2xl font-extrabold text-r-ink sm:text-3xl">
+        <h2 className="mt-2 font-r-display text-2xl text-r-ink sm:text-3xl">
           Win in four simple steps
         </h2>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -82,7 +82,7 @@ export default function RedeemPage() {
           <span className="font-r-body text-xs font-semibold uppercase tracking-wider text-r-signal">
             Prize showcase
           </span>
-          <h2 className="mt-2 font-r-display text-2xl font-extrabold text-r-ink sm:text-3xl">
+          <h2 className="mt-2 font-r-display text-2xl text-r-ink sm:text-3xl">
             What you could win today
           </h2>
           <Carousel opts={{ align: 'start', loop: true }} className="mt-8 px-1 sm:px-10">

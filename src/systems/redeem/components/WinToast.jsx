@@ -14,7 +14,7 @@ export default function WinToast({ visible, prizeName, onClose }) {
           </svg>
         </div>
         <div className="flex-1">
-          <p className="font-r-display text-sm font-extrabold text-r-ink">
+          <p className="font-r-display text-sm text-r-ink">
             You&rsquo;ve won!
           </p>
           <p className="font-r-body text-sm text-r-ink-muted">{prizeName}</p>

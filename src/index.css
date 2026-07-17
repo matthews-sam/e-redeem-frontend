@@ -1,53 +1,32 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Sora";
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/sora-800.woff2") format("woff2");
-}
-@font-face {
-  font-family: "IBM Plex Sans";
+  font-family: "Anton";
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-  src: url("/fonts/plex-400.woff2") format("woff2");
+  src: url("/fonts/anton-400.woff2") format("woff2");
 }
 @font-face {
-  font-family: "IBM Plex Sans";
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/plex-600.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Fraunces";
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/fraunces-600.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Fraunces";
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-  src: url("/fonts/fraunces-600-italic.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Work Sans";
+  font-family: "Barlow Condensed";
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-  src: url("/fonts/worksans-400.woff2") format("woff2");
+  src: url("/fonts/barlow-condensed-400.woff2") format("woff2");
 }
 @font-face {
-  font-family: "Work Sans";
+  font-family: "Barlow Condensed";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/barlow-condensed-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow Condensed";
   font-weight: 600;
   font-style: normal;
   font-display: swap;
-  src: url("/fonts/worksans-600.woff2") format("woff2");
+  src: url("/fonts/barlow-condensed-600.woff2") format("woff2");
 }
 
 @theme {
@@ -56,11 +35,16 @@
    * Linen #FDF1E2 (cream) / Dolphin #655A7C (muted purple) / Amethyst #AB92BF (light purple)
    * Both systems derive from this triad; each applies it differently so
    * the two still read as distinct systems.
+   *
+   * Shared typefaces across both systems:
+   * Anton (display/headlines — free alternative to Sailors; only ships
+   * weight 400, so display text uses font-normal, not font-bold/extrabold)
+   * Barlow Condensed (body/UI — free alternative to Proxima Nova Condensed)
    */
 
   /* System R — Redeem (product): Dolphin is the primary action color */
-  --font-r-display: "Sora", sans-serif;
-  --font-r-body: "IBM Plex Sans", sans-serif;
+  --font-r-display: "Anton", sans-serif;
+  --font-r-body: "Barlow Condensed", sans-serif;
 
   --color-r-signal: #655a7c; /* Dolphin */
   --color-r-signal-dark: #4e4363; /* Dolphin, darkened for hover/pressed */
@@ -73,8 +57,8 @@
   --color-r-cloud: #fdf1e2; /* Linen */
 
   /* System P — Portfolio (corporate site): Amethyst is the primary accent */
-  --font-p-display: "Fraunces", serif;
-  --font-p-body: "Work Sans", sans-serif;
+  --font-p-display: "Anton", sans-serif;
+  --font-p-body: "Barlow Condensed", sans-serif;
 
   --color-p-depth: #362e45; /* deep purple, distinct from R's ink */
   --color-p-current: #ab92bf; /* Amethyst */

@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="bg-p-depth px-6 py-12 text-white/60 sm:px-10">
       <div className="mx-auto flex max-w-5xl flex-col gap-8 sm:flex-row sm:justify-between">
         <div>
-          <div className="font-p-display text-lg font-semibold text-white">
+          <div className="font-p-display text-lg text-white">
             E-Redeem
           </div>
           <p className="mt-3 max-w-xs font-p-body text-sm">

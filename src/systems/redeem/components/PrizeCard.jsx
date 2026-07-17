@@ -23,7 +23,7 @@ export default function PrizeCard({ label, name, value }) {
         <span className="font-r-body text-xs font-semibold uppercase tracking-wide text-r-ink-muted">
           {label}
         </span>
-        <span className="font-r-display text-base font-extrabold text-r-ink">
+        <span className="font-r-display text-base text-r-ink">
           {name}
         </span>
         <span className="font-r-body text-sm text-r-signal">{value}</span>

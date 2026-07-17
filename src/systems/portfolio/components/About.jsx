@@ -16,7 +16,7 @@ export default function About() {
         <span className="font-p-body text-xs font-semibold uppercase tracking-wider text-p-slate">
           About us
         </span>
-        <h2 className="mt-2 max-w-2xl font-p-display text-2xl font-semibold text-p-depth sm:text-3xl">
+        <h2 className="mt-2 max-w-2xl font-p-display text-2xl text-p-depth sm:text-3xl">
           Transform your brand-consumer engagement strategy with a platform
           built for today&rsquo;s digital consumer.
         </h2>

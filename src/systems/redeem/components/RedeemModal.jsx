@@ -99,7 +99,7 @@ export default function RedeemModal({ isOpen, onClose, onSubmit }) {
       >
             <div className="mb-6 flex items-start justify-between">
               <div>
-                <h2 id="redeem-modal-title" className="font-r-display text-xl font-extrabold text-r-ink">
+                <h2 id="redeem-modal-title" className="font-r-display text-xl text-r-ink">
                   Redeem your code
                 </h2>
                 <p className="mt-1 font-r-body text-sm text-r-ink-muted">

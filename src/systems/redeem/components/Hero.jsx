@@ -43,7 +43,7 @@ export default function Hero({ onRedeemClick }) {
           <span className="h-1.5 w-1.5 rounded-full bg-r-reward" aria-hidden="true" />
           Win instantly
         </span>
-        <h1 className="font-r-display text-4xl font-extrabold leading-tight text-white sm:text-6xl">
+        <h1 className="font-r-display text-4xl leading-tight text-white sm:text-6xl">
           Enter your code,
           <br />
           win instantly.
