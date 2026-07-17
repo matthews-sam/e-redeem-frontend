@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Sora";
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/sora-800.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/plex-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/plex-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Fraunces";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/fraunces-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Fraunces";
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+  src: url("/fonts/fraunces-600-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Work Sans";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/worksans-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Work Sans";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/worksans-600.woff2") format("woff2");
+}
+
+@theme {
+  /* System R — Redeem (product) */
+  --font-r-display: "Sora", sans-serif;
+  --font-r-body: "IBM Plex Sans", sans-serif;
+
+  --color-r-signal: #5b3df0;
+  --color-r-signal-dark: #4a2ed1;
+  --color-r-signal-tint: #ece8fe;
+  --color-r-reward: #f0a63d;
+  --color-r-win: #1f9d63;
+  --color-r-ink: #171426;
+  --color-r-ink-muted: #6b6580;
+  --color-r-border: #e7e4f0;
+  --color-r-cloud: #f7f6fc;
+
+  /* System P — Portfolio (corporate site) */
+  --font-p-display: "Fraunces", serif;
+  --font-p-body: "Work Sans", sans-serif;
+
+  --color-p-depth: #14202e;
+  --color-p-current: #1c6fef;
+  --color-p-verified: #16946a;
+  --color-p-paper: #f6f7f9;
+  --color-p-mist: #e7ebf1;
+  --color-p-slate: #40506b;
+}
+
+body {
+  margin: 0;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
