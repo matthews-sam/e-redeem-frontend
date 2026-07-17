@@ -6,4 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   base: '/e-redeem-frontend/',
   plugins: [react(), tailwindcss()],
+  optimizeDeps: {
+    include: ['embla-carousel-react', 'embla-carousel', 'lucide-react'],
+  },
 })

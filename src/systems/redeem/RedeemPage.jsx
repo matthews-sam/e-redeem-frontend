@@ -3,6 +3,13 @@ import Header from './components/Header.jsx'
 import Hero from './components/Hero.jsx'
 import StepCard from './components/StepCard.jsx'
 import PrizeCard from './components/PrizeCard.jsx'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from './components/Carousel.jsx'
 import RedeemModal from './components/RedeemModal.jsx'
 import WinToast from './components/WinToast.jsx'
 import Footer from './components/Footer.jsx'
@@ -75,11 +82,17 @@ export default function RedeemPage() {
           <h2 className="mt-2 font-r-display text-2xl font-extrabold text-r-ink sm:text-3xl">
             What you could win today
           </h2>
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {PRIZES.map((prize) => (
-              <PrizeCard key={prize.name} {...prize} />
-            ))}
-          </div>
+          <Carousel opts={{ align: 'start', loop: true }} className="mt-8 px-1 sm:px-10">
+            <CarouselContent>
+              {PRIZES.map((prize) => (
+                <CarouselItem key={prize.name} className="basis-full sm:basis-1/2 lg:basis-1/3">
+                  <PrizeCard {...prize} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
       </section>
 
