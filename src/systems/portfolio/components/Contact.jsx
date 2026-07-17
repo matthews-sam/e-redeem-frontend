@@ -1,7 +1,7 @@
 import Button from './Button.jsx'
 
 const fieldClasses =
-  'rounded-md border border-p-mist px-4 py-3 font-p-body text-sm text-p-depth focus:border-p-current focus:outline-none focus:ring-2 focus:ring-p-current/20'
+  'rounded-md border border-p-mist px-4 py-3 font-p-body text-sm text-p-depth focus:border-p-slate focus:outline-none focus:ring-2 focus:ring-p-slate/20'
 const labelClasses = 'font-p-body text-xs font-medium text-p-slate'
 
 export default function Contact() {
@@ -9,7 +9,7 @@ export default function Contact() {
     <section id="contact" className="bg-white px-6 py-16 sm:px-10">
       <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 sm:grid-cols-2">
         <div>
-          <span className="font-p-body text-xs font-semibold uppercase tracking-wider text-p-current">
+          <span className="font-p-body text-xs font-semibold uppercase tracking-wider text-p-slate">
             Contact us
           </span>
           <h2 className="mt-2 font-p-display text-2xl font-semibold text-p-depth sm:text-3xl">

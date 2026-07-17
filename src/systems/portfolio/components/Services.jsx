@@ -25,7 +25,7 @@ export default function Services() {
   return (
     <section id="services" className="bg-p-paper px-6 py-16 sm:px-10">
       <div className="mx-auto max-w-5xl">
-        <span className="font-p-body text-xs font-semibold uppercase tracking-wider text-p-current">
+        <span className="font-p-body text-xs font-semibold uppercase tracking-wider text-p-slate">
           What we offer
         </span>
         <h2 className="mt-2 font-p-display text-2xl font-semibold text-p-depth sm:text-3xl">

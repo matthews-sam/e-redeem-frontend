@@ -51,30 +51,38 @@
 }
 
 @theme {
-  /* System R — Redeem (product) */
+  /*
+   * Shared base palette (from the client-supplied reference):
+   * Linen #FDF1E2 (cream) / Dolphin #655A7C (muted purple) / Amethyst #AB92BF (light purple)
+   * Both systems derive from this triad; each applies it differently so
+   * the two still read as distinct systems.
+   */
+
+  /* System R — Redeem (product): Dolphin is the primary action color */
   --font-r-display: "Sora", sans-serif;
   --font-r-body: "IBM Plex Sans", sans-serif;
 
-  --color-r-signal: #5b3df0;
-  --color-r-signal-dark: #4a2ed1;
-  --color-r-signal-tint: #ece8fe;
-  --color-r-reward: #f0a63d;
-  --color-r-win: #1f9d63;
-  --color-r-ink: #171426;
-  --color-r-ink-muted: #6b6580;
-  --color-r-border: #e7e4f0;
-  --color-r-cloud: #f7f6fc;
+  --color-r-signal: #655a7c; /* Dolphin */
+  --color-r-signal-dark: #4e4363; /* Dolphin, darkened for hover/pressed */
+  --color-r-signal-tint: #f1eaf6; /* Amethyst, lightened for chips/hover bg */
+  --color-r-reward: #b98f4a; /* muted gold accent, harmonized with the palette */
+  --color-r-win: #5c7a62; /* muted sage success */
+  --color-r-ink: #241f30; /* near-black purple */
+  --color-r-ink-muted: #655a7c; /* Dolphin, doubles as readable secondary text */
+  --color-r-border: #e9dfe7;
+  --color-r-cloud: #fdf1e2; /* Linen */
 
-  /* System P — Portfolio (corporate site) */
+  /* System P — Portfolio (corporate site): Amethyst is the primary accent */
   --font-p-display: "Fraunces", serif;
   --font-p-body: "Work Sans", sans-serif;
 
-  --color-p-depth: #14202e;
-  --color-p-current: #1c6fef;
-  --color-p-verified: #16946a;
-  --color-p-paper: #f6f7f9;
-  --color-p-mist: #e7ebf1;
-  --color-p-slate: #40506b;
+  --color-p-depth: #362e45; /* deep purple, distinct from R's ink */
+  --color-p-current: #ab92bf; /* Amethyst */
+  --color-p-current-ink: #241f30; /* dark text used on Amethyst (white fails contrast there) */
+  --color-p-verified: #5c7a62; /* same muted sage success as System R */
+  --color-p-paper: #fdf1e2; /* Linen */
+  --color-p-mist: #f3e9ee;
+  --color-p-slate: #655a7c; /* Dolphin, doubles as readable secondary text */
 }
 
 body {

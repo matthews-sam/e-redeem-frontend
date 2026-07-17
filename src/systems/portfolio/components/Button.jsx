@@ -1,5 +1,6 @@
 const variants = {
-  primary: 'bg-p-current text-white hover:bg-p-current/90',
+  // Amethyst (p-current) is too light for white text to meet contrast — pair it with dark ink text instead.
+  primary: 'bg-p-current text-p-current-ink hover:bg-p-current/90',
   outline: 'border border-white/30 text-white hover:bg-white/10',
   dark: 'bg-p-depth text-white hover:bg-p-depth/90',
 }
