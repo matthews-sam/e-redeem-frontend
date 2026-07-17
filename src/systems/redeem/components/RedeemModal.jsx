@@ -3,7 +3,14 @@ import Button from './Button.jsx'
 
 const CODE_LENGTH = 7
 
+const fieldClasses =
+  'h-11 w-full rounded-lg border border-r-border px-3 font-r-body text-sm text-r-ink placeholder:text-r-ink-muted/60 focus:border-r-signal focus:outline-none focus:ring-2 focus:ring-r-signal-tint'
+const labelClasses = 'font-r-body text-xs font-medium text-r-ink-muted'
+
 export default function RedeemModal({ isOpen, onClose, onSubmit }) {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [mobile, setMobile] = useState('')
   const [digits, setDigits] = useState(Array(CODE_LENGTH).fill(''))
   const inputs = useRef([])
 
@@ -35,7 +42,15 @@ export default function RedeemModal({ isOpen, onClose, onSubmit }) {
   }
 
   const code = digits.join('')
-  const isComplete = code.length === CODE_LENGTH
+  const isComplete =
+    code.length === CODE_LENGTH &&
+    firstName.trim().length > 0 &&
+    lastName.trim().length > 0 &&
+    mobile.trim().length > 0
+
+  const handleSubmit = () => {
+    onSubmit?.({ firstName: firstName.trim(), lastName: lastName.trim(), mobile: mobile.trim(), code })
+  }
 
   return (
     <div
@@ -48,7 +63,7 @@ export default function RedeemModal({ isOpen, onClose, onSubmit }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="redeem-modal-title"
-        className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl"
+        className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl"
       >
         <div className="mb-6 flex items-start justify-between">
           <div>
@@ -56,7 +71,7 @@ export default function RedeemModal({ isOpen, onClose, onSubmit }) {
               Redeem your code
             </h2>
             <p className="mt-1 font-r-body text-sm text-r-ink-muted">
-              Enter the 7-digit code exactly as shown on your voucher.
+              Fill in your details, then enter the 7-digit code exactly as shown on your voucher.
             </p>
           </div>
           <button
@@ -70,27 +85,75 @@ export default function RedeemModal({ isOpen, onClose, onSubmit }) {
           </button>
         </div>
 
-        <div className="mb-6 flex justify-between gap-1.5">
-          {digits.map((digit, i) => (
+        <div className="mb-5 grid grid-cols-2 gap-3">
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="redeem-first-name" className={labelClasses}>
+              First name
+            </label>
             <input
-              key={i}
-              ref={(el) => (inputs.current[i] = el)}
-              value={digit}
-              onChange={(e) => handleChange(i, e.target.value)}
-              onKeyDown={(e) => handleKeyDown(i, e)}
-              inputMode="numeric"
-              maxLength={1}
-              aria-label={`Digit ${i + 1} of ${CODE_LENGTH}`}
-              className="h-12 w-full rounded-lg border border-r-border text-center font-r-body text-lg font-semibold tabular-nums text-r-ink focus:border-r-signal focus:outline-none focus:ring-2 focus:ring-r-signal-tint"
+              id="redeem-first-name"
+              type="text"
+              autoComplete="given-name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className={fieldClasses}
             />
-          ))}
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="redeem-last-name" className={labelClasses}>
+              Last name
+            </label>
+            <input
+              id="redeem-last-name"
+              type="text"
+              autoComplete="family-name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className={fieldClasses}
+            />
+          </div>
+        </div>
+
+        <div className="mb-6 flex flex-col gap-1.5">
+          <label htmlFor="redeem-mobile" className={labelClasses}>
+            Mobile number
+          </label>
+          <input
+            id="redeem-mobile"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            placeholder="080X XXX XXXX"
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
+            className={fieldClasses}
+          />
+        </div>
+
+        <div className="mb-2 flex flex-col gap-1.5">
+          <span className={labelClasses}>7-digit code</span>
+          <div className="flex justify-between gap-1.5">
+            {digits.map((digit, i) => (
+              <input
+                key={i}
+                ref={(el) => (inputs.current[i] = el)}
+                value={digit}
+                onChange={(e) => handleChange(i, e.target.value)}
+                onKeyDown={(e) => handleKeyDown(i, e)}
+                inputMode="numeric"
+                maxLength={1}
+                aria-label={`Digit ${i + 1} of ${CODE_LENGTH}`}
+                className="h-12 w-full rounded-lg border border-r-border text-center font-r-body text-lg font-semibold tabular-nums text-r-ink focus:border-r-signal focus:outline-none focus:ring-2 focus:ring-r-signal-tint"
+              />
+            ))}
+          </div>
         </div>
 
         <Button
           variant="primary"
-          className="w-full"
+          className="mt-6 w-full"
           disabled={!isComplete}
-          onClick={() => onSubmit?.(code)}
+          onClick={handleSubmit}
         >
           Submit
         </Button>

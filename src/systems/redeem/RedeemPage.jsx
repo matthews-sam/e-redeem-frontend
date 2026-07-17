@@ -47,9 +47,9 @@ export default function RedeemPage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [toast, setToast] = useState(null)
 
-  const handleSubmit = (code) => {
+  const handleSubmit = ({ firstName, code }) => {
     setModalOpen(false)
-    setToast(`Code ${code} — ₦200 airtime credited.`)
+    setToast(`Thanks ${firstName} — code ${code} won ₦200 airtime.`)
   }
 
   useEffect(() => {
