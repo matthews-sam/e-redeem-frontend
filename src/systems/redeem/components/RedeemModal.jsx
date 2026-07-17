@@ -2,6 +2,16 @@ import { useEffect, useRef, useState } from 'react'
 import Button from './Button.jsx'
 
 const CODE_LENGTH = 7
+const MOBILE_LENGTH = 10
+
+const COUNTRY_CODES = [
+  { code: '+234', country: 'Nigeria' },
+  { code: '+233', country: 'Ghana' },
+  { code: '+254', country: 'Kenya' },
+  { code: '+27', country: 'South Africa' },
+  { code: '+44', country: 'United Kingdom' },
+  { code: '+1', country: 'United States' },
+]
 
 const fieldClasses =
   'h-11 w-full rounded-lg border border-r-border px-3 font-r-body text-sm text-r-ink placeholder:text-r-ink-muted/60 focus:border-r-signal focus:outline-none focus:ring-2 focus:ring-r-signal-tint'
@@ -10,6 +20,7 @@ const labelClasses = 'font-r-body text-xs font-medium text-r-ink-muted'
 export default function RedeemModal({ isOpen, onClose, onSubmit }) {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+  const [countryCode, setCountryCode] = useState(COUNTRY_CODES[0].code)
   const [mobile, setMobile] = useState('')
   const [digits, setDigits] = useState(Array(CODE_LENGTH).fill(''))
   const inputs = useRef([])
@@ -41,15 +52,24 @@ export default function RedeemModal({ isOpen, onClose, onSubmit }) {
     }
   }
 
+  const handleMobileChange = (value) => {
+    setMobile(value.replace(/[^0-9]/g, '').slice(0, MOBILE_LENGTH))
+  }
+
   const code = digits.join('')
   const isComplete =
     code.length === CODE_LENGTH &&
     firstName.trim().length > 0 &&
     lastName.trim().length > 0 &&
-    mobile.trim().length > 0
+    mobile.length === MOBILE_LENGTH
 
   const handleSubmit = () => {
-    onSubmit?.({ firstName: firstName.trim(), lastName: lastName.trim(), mobile: mobile.trim(), code })
+    onSubmit?.({
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      mobile: `${countryCode}${mobile}`,
+      code,
+    })
   }
 
   return (
@@ -118,16 +138,37 @@ export default function RedeemModal({ isOpen, onClose, onSubmit }) {
           <label htmlFor="redeem-mobile" className={labelClasses}>
             Mobile number
           </label>
-          <input
-            id="redeem-mobile"
-            type="tel"
-            inputMode="tel"
-            autoComplete="tel"
-            placeholder="080X XXX XXXX"
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
-            className={fieldClasses}
-          />
+          <div className="flex">
+            <label htmlFor="redeem-country-code" className="sr-only">
+              Country code
+            </label>
+            <select
+              id="redeem-country-code"
+              value={countryCode}
+              onChange={(e) => setCountryCode(e.target.value)}
+              className="h-11 shrink-0 cursor-pointer rounded-l-lg border border-r-border border-r-0 bg-r-cloud px-2 font-r-body text-sm text-r-ink focus:z-10 focus:border-r-signal focus:outline-none focus:ring-2 focus:ring-r-signal-tint"
+            >
+              {COUNTRY_CODES.map(({ code, country }) => (
+                <option key={code} value={code}>
+                  {code} {country}
+                </option>
+              ))}
+            </select>
+            <input
+              id="redeem-mobile"
+              type="tel"
+              inputMode="numeric"
+              autoComplete="tel-national"
+              placeholder="8161234567"
+              maxLength={MOBILE_LENGTH}
+              value={mobile}
+              onChange={(e) => handleMobileChange(e.target.value)}
+              className="h-11 w-full rounded-r-lg border border-r-border px-3 font-r-body text-sm text-r-ink placeholder:text-r-ink-muted/60 focus:z-10 focus:border-r-signal focus:outline-none focus:ring-2 focus:ring-r-signal-tint"
+            />
+          </div>
+          <span className="font-r-body text-xs text-r-ink-muted">
+            {mobile.length}/{MOBILE_LENGTH} digits
+          </span>
         </div>
 
         <div className="mb-2 flex flex-col gap-1.5">
