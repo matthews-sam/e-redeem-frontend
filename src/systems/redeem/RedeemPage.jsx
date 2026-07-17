@@ -38,6 +38,9 @@ const PRIZES = [
   { label: 'Grand prize', name: '₦500,000 cash', value: '3 available' },
   { label: 'Weekly prize', name: '10GB data bundle', value: '200 available' },
   { label: 'Instant win', name: '₦200 airtime', value: 'Most common' },
+  { label: 'Monthly prize', name: '₦100,000 cash', value: '5 available' },
+  { label: 'Bonus reward', name: '20GB data bundle', value: '150 available' },
+  { label: 'Instant win', name: '₦100 airtime', value: 'Runner-up tier' },
 ]
 
 export default function RedeemPage() {
