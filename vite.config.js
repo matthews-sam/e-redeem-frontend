@@ -7,6 +7,11 @@ export default defineConfig({
   base: '/e-redeem-frontend/',
   plugins: [react(), tailwindcss()],
   optimizeDeps: {
-    include: ['embla-carousel-react', 'embla-carousel', 'lucide-react'],
+    include: [
+      'embla-carousel-react',
+      'embla-carousel',
+      'lucide-react',
+      'country-flag-icons/react/3x2',
+    ],
   },
 })
