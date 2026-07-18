@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
-import useDelayedUnmount from '../hooks/useDelayedUnmount.js'
+import useDelayedUnmount from '../../../shared/hooks/useDelayedUnmount.js'
 
 const TRANSITION_MS = 150
 

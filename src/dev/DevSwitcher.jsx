@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom'
 
-// Review-only tooling chrome — not part of either system's brand.
+// Review-only tooling chrome — not part of any system's brand.
 export default function DevSwitcher({ current }) {
   const tabs = [
-    { to: '/', label: 'System R · Redeem' },
-    { to: '/portfolio', label: 'System P · Portfolio' },
+    { to: '/', label: 'Home' },
+    { to: '/campaigns/rtm-live', label: 'Code' },
+    { to: '/campaigns/brand-trivia', label: 'Quiz' },
+    { to: '/campaigns/summer-raffle', label: 'Raffle' },
+    { to: '/campaigns/customer-poll', label: 'Poll' },
   ]
 
   return (

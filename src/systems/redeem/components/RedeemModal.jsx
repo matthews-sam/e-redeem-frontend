@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { NG, GH, KE, ZA, GB, US } from 'country-flag-icons/react/3x2'
 import Button from './Button.jsx'
 import CountrySelect from './CountrySelect.jsx'
-import useDelayedUnmount from '../hooks/useDelayedUnmount.js'
+import useDelayedUnmount from '../../../shared/hooks/useDelayedUnmount.js'
 
 const TRANSITION_MS = 200
 
