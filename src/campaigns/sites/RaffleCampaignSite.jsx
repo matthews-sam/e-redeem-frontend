@@ -1,5 +1,15 @@
 import { useRef, useState } from 'react'
 import Button from '../../systems/redeem/components/Button.jsx'
+import StepCard from '../../systems/redeem/components/StepCard.jsx'
+import PrizeCard from '../../systems/redeem/components/PrizeCard.jsx'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from '../../systems/redeem/components/Carousel.jsx'
+import Footer from '../../systems/redeem/components/Footer.jsx'
 import Modal from '../../shared/components/Modal.jsx'
 import './raffleWheel.css'
 
@@ -8,9 +18,35 @@ const SEGMENTS = [
   { label: '₦500 Airtime', type: 'prize' },
   { label: 'Try Again', type: 'blank' },
   { label: '1GB Data', type: 'prize' },
-  { label: '₦1,000 Cash', type: 'blank' },
+  { label: '₦1,000 Cash', type: 'prize' },
   { label: 'Free Ticket', type: 'prize' },
   { label: 'No Win', type: 'blank' },
+]
+
+const STEPS = [
+  {
+    title: 'Click "Try your luck"',
+    description: 'Opens the wheel from the header or the button below.',
+  },
+  {
+    title: 'Spin the wheel',
+    description: 'Set it going — a Stop button appears once it’s spinning.',
+  },
+  {
+    title: 'Click Stop',
+    description: 'Locks in a random result and slows the wheel to a stop.',
+  },
+  {
+    title: 'Win if you land on a prize',
+    description: '4 of the 6 slots are winners.',
+  },
+]
+
+const PRIZES = [
+  { label: 'Wheel prize', name: '₦500 Airtime', value: 'Slot 1 of 6' },
+  { label: 'Wheel prize', name: '1GB Data', value: 'Slot 3 of 6' },
+  { label: 'Wheel prize', name: '₦1,000 Cash', value: 'Slot 4 of 6' },
+  { label: 'Wheel prize', name: 'Free Ticket', value: 'Slot 5 of 6' },
 ]
 
 const SEGMENT_ANGLE = 360 / SEGMENTS.length
@@ -198,6 +234,44 @@ export default function RaffleCampaignSite({ campaign }) {
           </Button>
         </div>
       </section>
+
+      <section className="mx-auto max-w-5xl px-6 py-16 sm:px-10">
+        <span className="font-r-body text-xs font-semibold uppercase tracking-wider text-r-signal">
+          How it works
+        </span>
+        <h2 className="mt-2 font-r-display text-2xl text-r-ink sm:text-3xl">
+          Win in four simple steps
+        </h2>
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map((step, i) => (
+            <StepCard key={step.title} number={i + 1} {...step} />
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-16 sm:px-10">
+        <div className="mx-auto max-w-5xl">
+          <span className="font-r-body text-xs font-semibold uppercase tracking-wider text-r-signal">
+            Prize showcase
+          </span>
+          <h2 className="mt-2 font-r-display text-2xl text-r-ink sm:text-3xl">
+            What you could win today
+          </h2>
+          <Carousel opts={{ align: 'start', loop: true }} className="mt-8 px-1 sm:px-10">
+            <CarouselContent>
+              {PRIZES.map((prize) => (
+                <CarouselItem key={prize.name} className="basis-full sm:basis-1/2 lg:basis-1/3">
+                  <PrizeCard {...prize} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+      </section>
+
+      <Footer />
 
       <RaffleModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
