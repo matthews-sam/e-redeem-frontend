@@ -25,7 +25,7 @@ const conicBackground = SEGMENTS.map((seg, i) => {
   return `${color} ${start}deg ${end}deg`
 }).join(', ')
 
-function RaffleWheel({ phase, rotation, onTransitionEnd }) {
+function RaffleWheel({ phase, rotation }) {
   const transition =
     phase === 'spinning'
       ? `transform ${SPIN_DURATION_MS}ms linear`
@@ -39,7 +39,6 @@ function RaffleWheel({ phase, rotation, onTransitionEnd }) {
       <div
         className="raffle-wheel"
         style={{ background: `conic-gradient(${conicBackground})`, transform: `rotate(${rotation}deg)`, transition }}
-        onTransitionEnd={onTransitionEnd}
       >
         {SEGMENTS.map((seg, i) => {
           const angle = i * SEGMENT_ANGLE + SEGMENT_ANGLE / 2
@@ -63,6 +62,7 @@ function RaffleModal({ isOpen, onClose }) {
   const [phase, setPhase] = useState('idle') // idle | spinning | stopping | done
   const [rotation, setRotation] = useState(0)
   const winningIndexRef = useRef(null)
+  const stopTimerRef = useRef(null)
 
   const handleSpin = () => {
     setRotation((prev) => prev + EXTRA_SPINS * 360 + 360) // long constant spin, direction only
@@ -78,14 +78,21 @@ function RaffleModal({ isOpen, onClose }) {
       return base + EXTRA_SPINS * 360 + targetOffset
     })
     setPhase('stopping')
+    // Driven by a timer matched to the CSS transition duration rather than
+    // the transitionend event — a mid-flight retarget (linear -> ease-out)
+    // doesn't reliably fire transitionend in every environment.
+    stopTimerRef.current = setTimeout(() => setPhase('done'), STOP_DURATION_MS)
   }
 
-  const handleWheelTransitionEnd = (e) => {
-    if (e.propertyName !== 'transform') return
-    if (phase === 'stopping') setPhase('done')
+  const clearStopTimer = () => {
+    if (stopTimerRef.current) {
+      clearTimeout(stopTimerRef.current)
+      stopTimerRef.current = null
+    }
   }
 
   const handleClose = () => {
+    clearStopTimer()
     setPhase('idle')
     setRotation(0)
     winningIndexRef.current = null
@@ -93,6 +100,7 @@ function RaffleModal({ isOpen, onClose }) {
   }
 
   const handlePlayAgain = () => {
+    clearStopTimer()
     setPhase('idle')
     winningIndexRef.current = null
   }
@@ -122,7 +130,7 @@ function RaffleModal({ isOpen, onClose }) {
         </button>
       </div>
 
-      <RaffleWheel phase={phase} rotation={rotation} onTransitionEnd={handleWheelTransitionEnd} />
+      <RaffleWheel phase={phase} rotation={rotation} />
 
       <div className="raffle-controls">
         {phase === 'idle' && (
