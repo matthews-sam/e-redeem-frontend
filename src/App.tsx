@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
-import PortfolioPage from './systems/portfolio/PortfolioPage.jsx'
-import CampaignSitePage from './campaigns/CampaignSitePage.jsx'
-import DevSwitcher from './dev/DevSwitcher.jsx'
+import PortfolioPage from './systems/portfolio/PortfolioPage.tsx'
+import CampaignSitePage from './campaigns/CampaignSitePage.tsx'
+import DevSwitcher from './dev/DevSwitcher.tsx'
 
 export default function App() {
   const location = useLocation()

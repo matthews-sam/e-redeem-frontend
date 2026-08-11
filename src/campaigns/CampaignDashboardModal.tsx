@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Hash, HelpCircle, Disc3, BarChart3, Plus, ArrowLeft } from 'lucide-react'
-import Modal from '../shared/components/Modal.jsx'
-import { useCampaigns, CAMPAIGN_TYPES } from './CampaignsContext.jsx'
+import Modal from '../shared/components/Modal.tsx'
+import { useCampaigns, CAMPAIGN_TYPES } from './CampaignsContext.tsx'
 
 import type { LucideIcon } from 'lucide-react'
-import type { CampaignStatus, CampaignType } from './types.js'
+import type { CampaignStatus, CampaignType } from './types.ts'
 
 const TYPE_ICONS: Record<CampaignType, LucideIcon> = {
   code: Hash,

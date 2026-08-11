@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import type { ReactNode } from 'react'
-import useDelayedUnmount from '../hooks/useDelayedUnmount.js'
+import useDelayedUnmount from '../hooks/useDelayedUnmount.ts'
 
 const TRANSITION_MS = 200
 

@@ -6,7 +6,7 @@ import type {
   CampaignsContextValue,
   CampaignType,
   CampaignTypeMeta,
-} from './types.js'
+} from './types.ts'
 
 const CampaignsContext = createContext<CampaignsContextValue | null>(null)
 

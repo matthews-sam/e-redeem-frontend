@@ -1,4 +1,4 @@
-import type { CampaignSiteProps } from '../types.js'
+import type { CampaignSiteProps } from '../types.ts'
 
 export default function PollCampaignSite({ campaign }: CampaignSiteProps) {
   return (

@@ -1,9 +1,9 @@
 import { useParams, Link } from 'react-router-dom'
-import RedeemPage from '../systems/redeem/RedeemPage.jsx'
-import QuizCampaignSite from './sites/QuizCampaignSite.jsx'
-import RaffleCampaignSite from './sites/RaffleCampaignSite.jsx'
-import PollCampaignSite from './sites/PollCampaignSite.jsx'
-import { useCampaigns } from './CampaignsContext.jsx'
+import RedeemPage from '../systems/redeem/RedeemPage.tsx'
+import QuizCampaignSite from './sites/QuizCampaignSite.tsx'
+import RaffleCampaignSite from './sites/RaffleCampaignSite.tsx'
+import PollCampaignSite from './sites/PollCampaignSite.tsx'
+import { useCampaigns } from './CampaignsContext.tsx'
 
 function NotFound() {
   return (

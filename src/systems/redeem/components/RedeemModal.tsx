@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import type { KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { NG, GH, KE, ZA, GB, US } from 'country-flag-icons/react/3x2'
-import Button from './Button.jsx'
-import CountrySelect from './CountrySelect.jsx'
-import type { CountryOption } from './CountrySelect.jsx'
-import useDelayedUnmount from '../../../shared/hooks/useDelayedUnmount.js'
+import Button from './Button.tsx'
+import CountrySelect from './CountrySelect.tsx'
+import type { CountryOption } from './CountrySelect.tsx'
+import useDelayedUnmount from '../../../shared/hooks/useDelayedUnmount.ts'
 
 const TRANSITION_MS = 200
 

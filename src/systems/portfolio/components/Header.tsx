@@ -1,4 +1,4 @@
-import Button from './Button.jsx'
+import Button from './Button.tsx'
 
 const NAV = ['Home', 'About', 'Contact']
 

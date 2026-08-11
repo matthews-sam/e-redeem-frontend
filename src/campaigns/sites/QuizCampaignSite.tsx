@@ -1,18 +1,18 @@
 import { useState } from 'react'
-import Button from '../../systems/redeem/components/Button.jsx'
-import StepCard from '../../systems/redeem/components/StepCard.jsx'
-import PrizeCard from '../../systems/redeem/components/PrizeCard.jsx'
+import Button from '../../systems/redeem/components/Button.tsx'
+import StepCard from '../../systems/redeem/components/StepCard.tsx'
+import PrizeCard from '../../systems/redeem/components/PrizeCard.tsx'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
-} from '../../systems/redeem/components/Carousel.jsx'
-import Footer from '../../systems/redeem/components/Footer.jsx'
-import Modal from '../../shared/components/Modal.jsx'
-import { QUIZ_QUESTIONS, PASS_THRESHOLD } from './quizQuestions.js'
-import type { CampaignSiteProps } from '../types.js'
+} from '../../systems/redeem/components/Carousel.tsx'
+import Footer from '../../systems/redeem/components/Footer.tsx'
+import Modal from '../../shared/components/Modal.tsx'
+import { QUIZ_QUESTIONS, PASS_THRESHOLD } from './quizQuestions.ts'
+import type { CampaignSiteProps } from '../types.ts'
 
 const FADE_MS = 150
 
@@ -59,7 +59,7 @@ const emptyAnswers = (): AnswerState => Array(QUIZ_QUESTIONS.length).fill(null)
 
 function QuizModal({ isOpen, onClose }: QuizModalProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [answers, setAnswers] = useState<AnswerState>(emptyAnswers)
+  const [answers, setAnswers] = useState<AnswerState>(emptyAnswers())
   const [visible, setVisible] = useState(true)
   const [result, setResult] = useState<QuizResult | null>(null)
 

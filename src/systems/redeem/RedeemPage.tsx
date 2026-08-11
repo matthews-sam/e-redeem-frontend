@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react'
-import Header from './components/Header.jsx'
-import Hero from './components/Hero.jsx'
-import StepCard from './components/StepCard.jsx'
-import PrizeCard from './components/PrizeCard.jsx'
+import Header from './components/Header.tsx'
+import Hero from './components/Hero.tsx'
+import StepCard from './components/StepCard.tsx'
+import PrizeCard from './components/PrizeCard.tsx'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
-} from './components/Carousel.jsx'
-import RedeemModal from './components/RedeemModal.jsx'
-import WinToast from './components/WinToast.jsx'
-import Footer from './components/Footer.jsx'
+} from './components/Carousel.tsx'
+import RedeemModal from './components/RedeemModal.tsx'
+import type { RedeemSubmission } from './components/RedeemModal.tsx'
+import WinToast from './components/WinToast.tsx'
+import Footer from './components/Footer.tsx'
 
 const STEPS = [
   {
