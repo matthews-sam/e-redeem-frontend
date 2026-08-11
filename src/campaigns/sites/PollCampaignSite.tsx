@@ -1,4 +1,6 @@
-export default function PollCampaignSite({ campaign }) {
+import type { CampaignSiteProps } from '../types.js'
+
+export default function PollCampaignSite({ campaign }: CampaignSiteProps) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-r-cloud px-6 text-center font-r-body">
       <span className="font-r-body text-xs font-semibold uppercase tracking-wider text-r-signal">

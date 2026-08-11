@@ -2,7 +2,11 @@ import Button from './Button.jsx'
 
 const NAV = ['Home', 'About', 'Contact']
 
-export default function Header({ onCampaignsClick }) {
+interface HeaderProps {
+  onCampaignsClick: () => void
+}
+
+export default function Header({ onCampaignsClick }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 flex items-center justify-between border-b border-white/10 bg-p-depth px-6 py-5 sm:px-10">
       <div className="font-p-display text-xl text-white">

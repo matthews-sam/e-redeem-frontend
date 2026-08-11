@@ -12,6 +12,7 @@ import {
 import Footer from '../../systems/redeem/components/Footer.jsx'
 import Modal from '../../shared/components/Modal.jsx'
 import { QUIZ_QUESTIONS, PASS_THRESHOLD } from './quizQuestions.js'
+import type { CampaignSiteProps } from '../types.js'
 
 const FADE_MS = 150
 
@@ -40,17 +41,33 @@ const PRIZES = [
   { label: 'Instant win', name: '₦150 airtime', value: 'Most common' },
 ]
 
-function QuizModal({ isOpen, onClose }) {
+interface QuizResult {
+  correct: number
+  total: number
+  passed: boolean
+}
+
+interface QuizModalProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+// One entry per question; null until that question is answered.
+type AnswerState = (number | null)[]
+
+const emptyAnswers = (): AnswerState => Array(QUIZ_QUESTIONS.length).fill(null)
+
+function QuizModal({ isOpen, onClose }: QuizModalProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [answers, setAnswers] = useState(Array(QUIZ_QUESTIONS.length).fill(null))
+  const [answers, setAnswers] = useState<AnswerState>(emptyAnswers)
   const [visible, setVisible] = useState(true)
-  const [result, setResult] = useState(null)
+  const [result, setResult] = useState<QuizResult | null>(null)
 
   const question = QUIZ_QUESTIONS[currentIndex]
   const allAnswered = answers.every((a) => a !== null)
   const isLast = currentIndex === QUIZ_QUESTIONS.length - 1
 
-  const goTo = (nextIndex) => {
+  const goTo = (nextIndex: number) => {
     if (nextIndex < 0 || nextIndex >= QUIZ_QUESTIONS.length) return
     setVisible(false)
     setTimeout(() => {
@@ -59,7 +76,7 @@ function QuizModal({ isOpen, onClose }) {
     }, FADE_MS)
   }
 
-  const selectAnswer = (optionIndex) => {
+  const selectAnswer = (optionIndex: number) => {
     setAnswers((prev) => {
       const next = [...prev]
       next[currentIndex] = optionIndex
@@ -69,7 +86,7 @@ function QuizModal({ isOpen, onClose }) {
   }
 
   const handleSubmit = () => {
-    const correct = answers.reduce(
+    const correct = answers.reduce<number>(
       (sum, answer, i) => sum + (answer === QUIZ_QUESTIONS[i].correctIndex ? 1 : 0),
       0,
     )
@@ -79,7 +96,7 @@ function QuizModal({ isOpen, onClose }) {
 
   const handleClose = () => {
     setCurrentIndex(0)
-    setAnswers(Array(QUIZ_QUESTIONS.length).fill(null))
+    setAnswers(emptyAnswers())
     setResult(null)
     setVisible(true)
     onClose?.()
@@ -87,7 +104,7 @@ function QuizModal({ isOpen, onClose }) {
 
   const handleRetry = () => {
     setCurrentIndex(0)
-    setAnswers(Array(QUIZ_QUESTIONS.length).fill(null))
+    setAnswers(emptyAnswers())
     setResult(null)
   }
 
@@ -198,7 +215,7 @@ function QuizModal({ isOpen, onClose }) {
   )
 }
 
-export default function QuizCampaignSite({ campaign }) {
+export default function QuizCampaignSite({ campaign }: CampaignSiteProps) {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (

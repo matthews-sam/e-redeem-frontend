@@ -1,8 +1,16 @@
 import { createContext, useContext, useState } from 'react'
+import type { ReactNode } from 'react'
+import type {
+  Campaign,
+  CampaignStatus,
+  CampaignsContextValue,
+  CampaignType,
+  CampaignTypeMeta,
+} from './types.js'
 
-const CampaignsContext = createContext(null)
+const CampaignsContext = createContext<CampaignsContextValue | null>(null)
 
-export const CAMPAIGN_TYPES = [
+export const CAMPAIGN_TYPES: CampaignTypeMeta[] = [
   {
     type: 'code',
     label: 'Code-Based',
@@ -27,7 +35,7 @@ export const CAMPAIGN_TYPES = [
 
 let nextId = 100
 
-const INITIAL_CAMPAIGNS = [
+const INITIAL_CAMPAIGNS: Campaign[] = [
   {
     id: 'rtm-live',
     name: 'RTM Live — Rema Concert',
@@ -60,13 +68,13 @@ const INITIAL_CAMPAIGNS = [
   },
 ]
 
-export function CampaignsProvider({ children }) {
-  const [campaigns, setCampaigns] = useState(INITIAL_CAMPAIGNS)
+export function CampaignsProvider({ children }: { children: ReactNode }) {
+  const [campaigns, setCampaigns] = useState<Campaign[]>(INITIAL_CAMPAIGNS)
 
-  const addCampaign = (type) => {
+  const addCampaign = (type: CampaignType): Campaign => {
     const meta = CAMPAIGN_TYPES.find((t) => t.type === type)
     const countOfType = campaigns.filter((c) => c.type === type).length
-    const campaign = {
+    const campaign: Campaign = {
       id: `${type}-${nextId++}`,
       name: `New ${meta?.label ?? type} Campaign ${countOfType + 1}`,
       type,
@@ -76,7 +84,7 @@ export function CampaignsProvider({ children }) {
     return campaign
   }
 
-  const setCampaignStatus = (id, status) => {
+  const setCampaignStatus = (id: string, status: CampaignStatus) => {
     setCampaigns((prev) => prev.map((c) => (c.id === id ? { ...c, status } : c)))
   }
 
@@ -87,7 +95,7 @@ export function CampaignsProvider({ children }) {
   )
 }
 
-export function useCampaigns() {
+export function useCampaigns(): CampaignsContextValue {
   const ctx = useContext(CampaignsContext)
   if (!ctx) throw new Error('useCampaigns must be used within a CampaignsProvider')
   return ctx

@@ -1,4 +1,10 @@
-const STATS = [
+interface Stat {
+  label: string
+  // null renders the em-dash placeholder; real figures are pending from the client.
+  value: string | number | null
+}
+
+const STATS: Stat[] = [
   { label: 'Projects', value: null },
   { label: 'Clients', value: null },
   { label: 'Awarded', value: null },

@@ -1,4 +1,11 @@
-export default function WinToast({ visible, prizeName, onClose }) {
+interface WinToastProps {
+  visible: boolean
+  // Null while no toast is queued; callers derive `visible` from the same state.
+  prizeName: string | null
+  onClose?: () => void
+}
+
+export default function WinToast({ visible, prizeName, onClose }: WinToastProps) {
   if (!visible) return null
 
   return (

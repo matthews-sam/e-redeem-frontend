@@ -1,5 +1,12 @@
+export interface QuizQuestion {
+  question: string
+  options: string[]
+  // Index into `options` of the correct answer.
+  correctIndex: number
+}
+
 // Dummy questions for testing the quiz campaign flow.
-export const QUIZ_QUESTIONS = [
+export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     question: 'What is the capital of Nigeria?',
     options: ['Lagos', 'Abuja', 'Kano', 'Ibadan'],
@@ -32,4 +39,5 @@ export const QUIZ_QUESTIONS = [
   },
 ]
 
-export const PASS_THRESHOLD = 0.8
+// Fraction of questions a player must answer correctly to win.
+export const PASS_THRESHOLD: number = 0.8

@@ -4,26 +4,34 @@ import { Hash, HelpCircle, Disc3, BarChart3, Plus, ArrowLeft } from 'lucide-reac
 import Modal from '../shared/components/Modal.jsx'
 import { useCampaigns, CAMPAIGN_TYPES } from './CampaignsContext.jsx'
 
-const TYPE_ICONS = {
+import type { LucideIcon } from 'lucide-react'
+import type { CampaignStatus, CampaignType } from './types.js'
+
+const TYPE_ICONS: Record<CampaignType, LucideIcon> = {
   code: Hash,
   quiz: HelpCircle,
   raffle: Disc3,
   poll: BarChart3,
 }
 
-const TABS = [
+const TABS: { key: CampaignStatus; label: string }[] = [
   { key: 'active', label: 'Active Campaigns' },
   { key: 'inactive', label: 'Inactive Campaigns' },
 ]
 
-export default function CampaignDashboardModal({ isOpen, onClose }) {
+interface CampaignDashboardModalProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export default function CampaignDashboardModal({ isOpen, onClose }: CampaignDashboardModalProps) {
   const { campaigns, addCampaign, setCampaignStatus } = useCampaigns()
-  const [tab, setTab] = useState('active')
+  const [tab, setTab] = useState<CampaignStatus>('active')
   const [creating, setCreating] = useState(false)
 
   const visible = campaigns.filter((c) => c.status === tab)
 
-  const handleCreate = (type) => {
+  const handleCreate = (type: CampaignType) => {
     addCampaign(type)
     setCreating(false)
   }

@@ -1,6 +1,10 @@
 import Button from './Button.jsx'
 
-export default function Header({ onRedeemClick }) {
+interface HeaderProps {
+  onRedeemClick: () => void
+}
+
+export default function Header({ onRedeemClick }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 flex items-center justify-between border-b border-r-border bg-r-cloud/90 px-6 py-4 backdrop-blur sm:px-10">
       <div className="font-r-display text-xl text-r-ink">

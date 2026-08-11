@@ -1,4 +1,11 @@
-export default function StepCard({ number, title, description }) {
+interface StepCardProps {
+  // Rendered zero-padded, e.g. 1 -> "01".
+  number: number
+  title: string
+  description: string
+}
+
+export default function StepCard({ number, title, description }: StepCardProps) {
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-r-border bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-r-signal/30 hover:shadow-md motion-reduce:hover:translate-y-0">
       <span className="font-r-display text-2xl text-r-signal">

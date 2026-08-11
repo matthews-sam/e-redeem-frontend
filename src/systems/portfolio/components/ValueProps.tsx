@@ -1,4 +1,9 @@
-const PROPS = [
+interface ValueProp {
+  title: string
+  description: string
+}
+
+const PROPS: ValueProp[] = [
   {
     title: 'Seamless Digital Reward',
     description: 'End-to-end digitised reward management and redemption.',

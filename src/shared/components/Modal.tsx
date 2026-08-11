@@ -1,16 +1,35 @@
 import { useEffect } from 'react'
+import type { ReactNode } from 'react'
 import useDelayedUnmount from '../hooks/useDelayedUnmount.js'
 
 const TRANSITION_MS = 200
 
+interface ModalProps {
+  isOpen: boolean
+  // Called on Escape and on backdrop click; optional to match the `onClose?.()`
+  // call sites, though every current caller supplies it.
+  onClose?: () => void
+  // id of the element labelling the dialog, forwarded to aria-labelledby.
+  labelledBy?: string
+  className?: string
+  children: ReactNode
+}
+
 // Generic backdrop + dialog shell with a fade/scale transition on open and close.
 // Used by RedeemModal, CampaignDashboardModal, and the quiz/raffle campaign sites.
-export default function Modal({ isOpen, onClose, labelledBy, className = '', children }) {
+export default function Modal({
+  isOpen,
+  onClose,
+  labelledBy,
+  className = '',
+  children,
+}: ModalProps) {
   const shouldRender = useDelayedUnmount(isOpen, TRANSITION_MS)
 
   useEffect(() => {
     if (!isOpen) return
-    const handleKey = (e) => {
+    // Native KeyboardEvent, not React's synthetic one — this is a window listener.
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose?.()
     }
     window.addEventListener('keydown', handleKey)

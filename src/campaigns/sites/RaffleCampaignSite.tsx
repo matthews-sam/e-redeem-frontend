@@ -11,10 +11,16 @@ import {
 } from '../../systems/redeem/components/Carousel.jsx'
 import Footer from '../../systems/redeem/components/Footer.jsx'
 import Modal from '../../shared/components/Modal.jsx'
+import type { CampaignSiteProps } from '../types.js'
 import './raffleWheel.css'
 
+interface Segment {
+  label: string
+  type: 'prize' | 'blank'
+}
+
 // 6 slots: 4 prizes, 2 blanks — structure only, restyle freely later.
-const SEGMENTS = [
+const SEGMENTS: Segment[] = [
   { label: '₦500 Airtime', type: 'prize' },
   { label: 'Try Again', type: 'blank' },
   { label: '1GB Data', type: 'prize' },
@@ -61,7 +67,15 @@ const conicBackground = SEGMENTS.map((seg, i) => {
   return `${color} ${start}deg ${end}deg`
 }).join(', ')
 
-function RaffleWheel({ phase, rotation }) {
+type SpinPhase = 'idle' | 'spinning' | 'stopping' | 'done'
+
+interface RaffleWheelProps {
+  phase: SpinPhase
+  // Absolute wheel rotation in degrees; only ever increases.
+  rotation: number
+}
+
+function RaffleWheel({ phase, rotation }: RaffleWheelProps) {
   const transition =
     phase === 'spinning'
       ? `transform ${SPIN_DURATION_MS}ms linear`
@@ -94,11 +108,17 @@ function RaffleWheel({ phase, rotation }) {
   )
 }
 
-function RaffleModal({ isOpen, onClose }) {
-  const [phase, setPhase] = useState('idle') // idle | spinning | stopping | done
+interface RaffleModalProps {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+function RaffleModal({ isOpen, onClose }: RaffleModalProps) {
+  const [phase, setPhase] = useState<SpinPhase>('idle')
   const [rotation, setRotation] = useState(0)
-  const winningIndexRef = useRef(null)
-  const stopTimerRef = useRef(null)
+  // Index into SEGMENTS, chosen when Stop is pressed; null while no result.
+  const winningIndexRef = useRef<number | null>(null)
+  const stopTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const handleSpin = () => {
     setRotation((prev) => prev + EXTRA_SPINS * 360 + 360) // long constant spin, direction only
@@ -201,7 +221,7 @@ function RaffleModal({ isOpen, onClose }) {
   )
 }
 
-export default function RaffleCampaignSite({ campaign }) {
+export default function RaffleCampaignSite({ campaign }: CampaignSiteProps) {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (

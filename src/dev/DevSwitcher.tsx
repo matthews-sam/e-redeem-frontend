@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom'
 
+interface DevSwitcherProps {
+  // Current pathname, used to highlight the active tab.
+  current: string
+}
+
 // Review-only tooling chrome — not part of any system's brand.
-export default function DevSwitcher({ current }) {
+export default function DevSwitcher({ current }: DevSwitcherProps) {
   const tabs = [
     { to: '/', label: 'Home' },
     { to: '/campaigns/rtm-live', label: 'Code' },

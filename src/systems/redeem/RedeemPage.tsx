@@ -45,9 +45,9 @@ const PRIZES = [
 
 export default function RedeemPage() {
   const [modalOpen, setModalOpen] = useState(false)
-  const [toast, setToast] = useState(null)
+  const [toast, setToast] = useState<string | null>(null)
 
-  const handleSubmit = ({ firstName, code }) => {
+  const handleSubmit = ({ firstName, code }: RedeemSubmission) => {
     setModalOpen(false)
     setToast(`Thanks ${firstName} — code ${code} won ₦200 airtime.`)
   }

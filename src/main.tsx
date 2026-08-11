@@ -5,7 +5,10 @@ import './index.css'
 import App from './App.jsx'
 import { CampaignsProvider } from './campaigns/CampaignsContext.jsx'
 
-createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root')
+if (!rootElement) throw new Error('Root element #root not found in index.html')
+
+createRoot(rootElement).render(
   <StrictMode>
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <CampaignsProvider>

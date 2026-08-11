@@ -1,6 +1,10 @@
 import Button from './Button.jsx'
 
-export default function Hero({ onRedeemClick }) {
+interface HeroProps {
+  onRedeemClick: () => void
+}
+
+export default function Hero({ onRedeemClick }: HeroProps) {
   return (
     <section className="relative overflow-hidden bg-r-ink px-6 py-20 sm:px-10 sm:py-28">
       <div

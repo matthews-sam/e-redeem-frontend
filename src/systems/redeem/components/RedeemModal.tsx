@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import type { KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { NG, GH, KE, ZA, GB, US } from 'country-flag-icons/react/3x2'
 import Button from './Button.jsx'
 import CountrySelect from './CountrySelect.jsx'
+import type { CountryOption } from './CountrySelect.jsx'
 import useDelayedUnmount from '../../../shared/hooks/useDelayedUnmount.js'
 
 const TRANSITION_MS = 200
@@ -9,7 +11,7 @@ const TRANSITION_MS = 200
 const CODE_LENGTH = 7
 const MOBILE_LENGTH = 10
 
-const COUNTRY_CODES = [
+const COUNTRY_CODES: CountryOption[] = [
   { code: '+234', country: 'Nigeria', Flag: NG },
   { code: '+233', country: 'Ghana', Flag: GH },
   { code: '+254', country: 'Kenya', Flag: KE },
@@ -22,25 +24,40 @@ const fieldClasses =
   'h-11 w-full rounded-lg border border-r-border px-3 font-r-body text-sm text-r-ink placeholder:text-r-ink-muted/60 focus:border-r-signal focus:outline-none focus:ring-2 focus:ring-r-signal-tint'
 const labelClasses = 'font-r-body text-xs font-medium text-r-ink-muted'
 
-export default function RedeemModal({ isOpen, onClose, onSubmit }) {
+export interface RedeemSubmission {
+  firstName: string
+  lastName: string
+  // Country code and national number joined, e.g. "+2348161234567".
+  mobile: string
+  code: string
+}
+
+interface RedeemModalProps {
+  isOpen: boolean
+  onClose?: () => void
+  onSubmit?: (submission: RedeemSubmission) => void
+}
+
+export default function RedeemModal({ isOpen, onClose, onSubmit }: RedeemModalProps) {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [countryCode, setCountryCode] = useState(COUNTRY_CODES[0].code)
   const [mobile, setMobile] = useState('')
-  const [digits, setDigits] = useState(Array(CODE_LENGTH).fill(''))
-  const inputs = useRef([])
+  const [digits, setDigits] = useState<string[]>(Array(CODE_LENGTH).fill(''))
+  // One slot per digit input; null for any not currently mounted.
+  const inputs = useRef<(HTMLInputElement | null)[]>([])
   const shouldRender = useDelayedUnmount(isOpen, TRANSITION_MS)
 
   useEffect(() => {
     if (!isOpen) return
-    const handleKey = (e) => {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose?.()
     }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
   }, [isOpen, onClose])
 
-  const handleChange = (index, value) => {
+  const handleChange = (index: number, value: string) => {
     const char = value.replace(/[^0-9]/g, '').slice(-1)
     const next = [...digits]
     next[index] = char
@@ -50,13 +67,13 @@ export default function RedeemModal({ isOpen, onClose, onSubmit }) {
     }
   }
 
-  const handleKeyDown = (index, e) => {
+  const handleKeyDown = (index: number, e: ReactKeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Backspace' && !digits[index] && index > 0) {
       inputs.current[index - 1]?.focus()
     }
   }
 
-  const handleMobileChange = (value) => {
+  const handleMobileChange = (value: string) => {
     setMobile(value.replace(/[^0-9]/g, '').slice(0, MOBILE_LENGTH))
   }
 
@@ -175,7 +192,9 @@ export default function RedeemModal({ isOpen, onClose, onSubmit }) {
                 {digits.map((digit, i) => (
                   <input
                     key={i}
-                    ref={(el) => (inputs.current[i] = el)}
+                    ref={(el) => {
+                      inputs.current[i] = el
+                    }}
                     value={digit}
                     onChange={(e) => handleChange(i, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(i, e)}

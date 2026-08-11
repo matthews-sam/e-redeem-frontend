@@ -1,4 +1,12 @@
-export default function PrizeCard({ label, name, value }) {
+interface PrizeCardProps {
+  // Tier label, e.g. "Grand prize".
+  label: string
+  name: string
+  // Free-form availability text, e.g. "3 available".
+  value: string
+}
+
+export default function PrizeCard({ label, name, value }: PrizeCardProps) {
   return (
     <div className="flex flex-col overflow-hidden rounded-xl border border-r-border bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-r-signal/30 hover:shadow-md motion-reduce:hover:translate-y-0">
       <div className="flex h-32 items-center justify-center bg-gradient-to-br from-r-signal-tint to-r-signal/20">

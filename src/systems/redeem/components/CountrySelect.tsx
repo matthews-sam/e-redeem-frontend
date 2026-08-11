@@ -1,21 +1,45 @@
 import { useEffect, useRef, useState } from 'react'
+import type { ComponentType, HTMLAttributes, SVGAttributes } from 'react'
 import { ChevronDown } from 'lucide-react'
 import useDelayedUnmount from '../../../shared/hooks/useDelayedUnmount.js'
 
 const TRANSITION_MS = 150
 
-export default function CountrySelect({ options, value, onChange }) {
+// country-flag-icons types its flags against HTMLElement & SVGElement and does
+// not export the component type, so mirror its prop shape here to stay
+// assignable from the package's exports.
+type FlagElement = HTMLElement & SVGElement
+
+export type FlagComponent = ComponentType<
+  HTMLAttributes<FlagElement> & SVGAttributes<FlagElement>
+>
+
+export interface CountryOption {
+  // Dialling code, e.g. "+234".
+  code: string
+  country: string
+  Flag: FlagComponent
+}
+
+interface CountrySelectProps {
+  options: CountryOption[]
+  // Dialling code of the selected option; falls back to options[0] if unmatched.
+  value: string
+  onChange: (code: string) => void
+}
+
+export default function CountrySelect({ options, value, onChange }: CountrySelectProps) {
   const [open, setOpen] = useState(false)
-  const rootRef = useRef(null)
+  const rootRef = useRef<HTMLDivElement>(null)
   const selected = options.find((o) => o.code === value) ?? options[0]
   const shouldRenderList = useDelayedUnmount(open, TRANSITION_MS)
 
   useEffect(() => {
     if (!open) return
-    const handlePointerDown = (e) => {
-      if (rootRef.current && !rootRef.current.contains(e.target)) setOpen(false)
+    const handlePointerDown = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false)
     }
-    const handleKey = (e) => {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false)
     }
     document.addEventListener('mousedown', handlePointerDown)
