@@ -1,4 +1,4 @@
-import Button from './Button.jsx'
+import Button from './Button.tsx'
 
 const fieldClasses =
   'rounded-md border border-p-mist px-4 py-3 font-p-body text-sm text-p-depth focus:border-p-slate focus:outline-none focus:ring-2 focus:ring-p-slate/20'

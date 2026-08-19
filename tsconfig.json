@@ -16,20 +16,16 @@
     "allowImportingTsExtensions": true,
     "types": ["vite/client", "node"],
 
-    /* Gradual migration: .js/.jsx keep working and stay unchecked until converted */
-    "allowJs": true,
-    "checkJs": false,
-
     /* Vite owns emit; this project only ever type-checks */
     "noEmit": true,
     "skipLibCheck": true,
 
-    /* Strictness — applies to converted .ts/.tsx files only */
+    /* Strictness */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "vite.config.js"]
+  "include": ["src", "vite.config.ts"]
 }
